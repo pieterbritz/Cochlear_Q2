@@ -7,39 +7,64 @@ class SLinkedList:
     def __init__(self):
         self.head = None
 
-    # Function to add a new node
-    def AddAtEnd(self, newdata):
-        NewNode = Node(newdata)
-        if self.head is None:
-            self.head = NewNode
-            return
-        laste = self.head
-        while(laste.next):
-            laste = laste.next
-        laste.next=NewNode
+    def AddToBegining(self, newdata):
+        newNode = Node(newdata)
+        newNode.next = self.head
+        self.head = newNode
 
-# Function to delete node
-    def DeleteNode(self, Removekey):
-        HeadVal = self.head            
-        if (HeadVal is not None):
-            if (HeadVal.data == Removekey):
-                self.head = HeadVal.next
-                HeadVal = None
-                return
-        while (HeadVal is not None):
-            if HeadVal.data == Removekey:
-                break
-            prev = HeadVal
-            HeadVal = HeadVal.next
-        if (HeadVal == None):
+    # Function to add a new node
+    def AddToEnd(self, newdata):
+        newNode = Node(newdata)
+        if self.head is None:
+            self.head = newNode
             return
-        prev.next = HeadVal.next
-        HeadVal = None
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = newNode
+
+    # Function to delete a node
+    def DeleteNode(self, removekey):
+        headVal = self.head            
+        if headVal is not None:
+            if headVal.data == removekey:
+                self.head = headVal.next
+                headVal = None
+                return
+        while headVal is not None:
+            if headVal.data == removekey:
+                break
+            prev = headVal
+            headVal = headVal.next
+        if headVal == None:
+            return
+        prev.next = headVal.next
+        headVal = None
+        
+    # Function to calculate the number of nodes in the list
+    def CalculateNumberOfNodes(self):
+        start = self.head
+        total = 0
+        while start is not None:
+            total += 1
+            start = start.next
+        return total  
 
     # Function to print the linked list
     def PrintList(self):
-        printval = self.headval
-        while printval is not None:
-            print (printval.dataval)
-            printval = printval.nextval
+        printVal = self.head
+        while printVal is not None:
+            print (printVal.data)
+            printVal = printVal.next
+    
+    # Function to print the linked list in reverse
+    # If the list was a boubly list, 
+    #   the previous node reference could have been used
+    def PrintListInReverse(self):
+        tmp = SLinkedList()
+        headVal = self.head           
+        while headVal is not None:
+            tmp.AddToBegining(headVal.data)
+            headVal = headVal.next
+        tmp.PrintList()
 
